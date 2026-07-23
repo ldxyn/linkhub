@@ -1,0 +1,218 @@
+// ═══════════════════════════════════════════
+// ANIMATIONS — Keyframes & Reveal Classes
+// ═══════════════════════════════════════════
+
+@use 'variables' as *;
+@use 'mixins' as *;
+
+// ── Keyframes ──────────────────────────────
+
+// Fade in from below
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Fade in with blur
+@keyframes fadeInBlur {
+  from {
+    opacity: 0;
+    filter: blur(10px);
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0);
+  }
+}
+
+// Simple fade in
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+// Fade out + scale down (preloader exit)
+@keyframes fadeOutScale {
+  from {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(0.95);
+    visibility: hidden;
+  }
+}
+
+// Gentle float (hero image)
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+// Glow pulse
+@keyframes glowPulse {
+  0%, 100% {
+    box-shadow:
+      0 0 20px var(--color-accent-glow),
+      0 0 40px rgba(var(--color-accent-rgb), 0.1);
+  }
+  50% {
+    box-shadow:
+      0 0 30px var(--color-accent-glow),
+      0 0 60px rgba(var(--color-accent-rgb), 0.2);
+  }
+}
+
+// Glow ring rotation (preloader)
+@keyframes ringRotate {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+// Progress bar fill
+@keyframes progressFill {
+  from { width: 0%; }
+  to   { width: 100%; }
+}
+
+// Letter stagger reveal
+@keyframes letterReveal {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+// Shimmer sweep
+@keyframes shimmerSweep {
+  from {
+    left: -100%;
+  }
+  to {
+    left: 200%;
+  }
+}
+
+// Spin (for icons)
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+// Heart beat (footer)
+@keyframes heartBeat {
+  0%, 100% { transform: scale(1); }
+  15% { transform: scale(1.25); }
+  30% { transform: scale(1); }
+  45% { transform: scale(1.15); }
+  60% { transform: scale(1); }
+}
+
+// Icon rotate on theme toggle
+@keyframes iconSwapIn {
+  from {
+    opacity: 0;
+    transform: rotate(-90deg) scale(0.5);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+  }
+}
+
+@keyframes iconSwapOut {
+  from {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: rotate(90deg) scale(0.5);
+  }
+}
+
+
+// ── Reveal Classes (Intersection Observer) ──
+
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition:
+    opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reveal-text {
+  opacity: 0;
+  transform: translateY(20px);
+  filter: blur(6px);
+  transition:
+    opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.6s cubic-bezier(0.4, 0, 0.2, 1),
+    filter 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transition-delay: var(--delay, 0s);
+
+  &.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+.reveal-card {
+  opacity: 0;
+  transform: translateY(40px) scale(0.97);
+  transition:
+    opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition-delay: calc(var(--card-i, 0) * 0.08s);
+
+  &.is-visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+
+// ── Reduced Motion ─────────────────────────
+@include reduced-motion {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .reveal,
+  .reveal-text,
+  .reveal-card {
+    opacity: 1;
+    transform: none;
+    filter: none;
+  }
+}
