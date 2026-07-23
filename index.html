@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Akhil Rashed — LinkHub. All my links in one place.">
+  <title>Akhil Rashed — LinkHub</title>
+
+  <!-- Fonts: Satoshi (display) + Inter (body) via Fontshare / Google -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons (SVG-based) -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+
+  <!-- Compiled Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════
+       FIXED BACKGROUND (mobile-safe, never scrolls)
+       ═══════════════════════════════════════════ -->
+  <div class="bg-fixed" aria-hidden="true">
+    <img src="bg.img" alt="" class="bg-fixed__img" loading="eager">
+    <div class="bg-fixed__overlay"></div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       PRELOADER
+       ═══════════════════════════════════════════ -->
+  <div class="preloader" id="preloader" role="status" aria-label="Loading">
+    <div class="preloader__content">
+      <div class="preloader__glow-ring">
+        <img
+          src="preloader.img"
+          alt="Akhil Rashed logo"
+          class="preloader__logo"
+          width="100"
+          height="100"
+        >
+      </div>
+      <div class="preloader__text" aria-hidden="true">
+        <span class="preloader__letter" style="--i:0">A</span>
+        <span class="preloader__letter" style="--i:1">k</span>
+        <span class="preloader__letter" style="--i:2">h</span>
+        <span class="preloader__letter" style="--i:3">i</span>
+        <span class="preloader__letter" style="--i:4">l</span>
+      </div>
+      <div class="preloader__bar">
+        <div class="preloader__bar-fill"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       THEME TOGGLE (fixed, top-right)
+       ═══════════════════════════════════════════ -->
+  <button
+    class="theme-toggle"
+    id="themeToggle"
+    type="button"
+    aria-label="Toggle light and dark theme"
+    title="Toggle theme"
+  >
+    <span class="theme-toggle__icon theme-toggle__icon--sun">
+      <i data-lucide="sun"></i>
+    </span>
+    <span class="theme-toggle__icon theme-toggle__icon--moon">
+      <i data-lucide="moon"></i>
+    </span>
+  </button>
+
+  <!-- ═══════════════════════════════════════════
+       NAVBAR
+       ═══════════════════════════════════════════ -->
+  <nav class="navbar" id="navbar" role="navigation" aria-label="Main navigation">
+    <div class="navbar__inner">
+      <a href="#" class="navbar__logo" aria-label="Akhil Rashed home">
+        <i data-lucide="link-2" class="navbar__logo-icon"></i>
+        <span class="navbar__logo-text">LinkHub</span>
+      </a>
+
+      <div class="navbar__links" id="navLinks">
+        <a href="#hero" class="navbar__link" data-nav-link>
+          <i data-lucide="home" class="navbar__link-icon"></i>
+          <span>Home</span>
+        </a>
+        <a href="#links" class="navbar__link" data-nav-link>
+          <i data-lucide="layers" class="navbar__link-icon"></i>
+          <span>Links</span>
+        </a>
+        <a href="#footer" class="navbar__link" data-nav-link>
+          <i data-lucide="info" class="navbar__link-icon"></i>
+          <span>About</span>
+        </a>
+      </div>
+
+      <button
+        class="navbar__hamburger"
+        id="navHamburger"
+        type="button"
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+        aria-controls="navDrawer"
+      >
+        <span class="navbar__hamburger-line"></span>
+        <span class="navbar__hamburger-line"></span>
+        <span class="navbar__hamburger-line"></span>
+      </button>
+    </div>
+
+    <!-- Mobile Drawer -->
+    <div class="navbar__drawer" id="navDrawer" aria-hidden="true">
+      <div class="navbar__drawer-inner">
+        <a href="#hero" class="navbar__drawer-link" data-drawer-link>
+          <i data-lucide="home"></i>
+          <span>Home</span>
+        </a>
+        <a href="#links" class="navbar__drawer-link" data-drawer-link>
+          <i data-lucide="layers"></i>
+          <span>Links</span>
+        </a>
+        <a href="#footer" class="navbar__drawer-link" data-drawer-link>
+          <i data-lucide="info"></i>
+          <span>About</span>
+        </a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════
+       MAIN CONTENT
+       ═══════════════════════════════════════════ -->
+  <main class="main" id="mainContent">
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="hero">
+      <div class="hero__card reveal">
+        <div class="hero__image-wrapper">
+          <div class="hero__glow-ring"></div>
+          <img
+            src="akhil.img"
+            alt="Akhil Rashed — portrait photo"
+            class="hero__image"
+            width="160"
+            height="160"
+            loading="eager"
+          >
+        </div>
+
+        <h1 class="hero__name reveal-text">Akhil Rashed</h1>
+        <p class="hero__tagline reveal-text" style="--delay: 0.2s">
+          Creative Developer · Designer · Digital Craftsman
+        </p>
+
+        <div class="hero__social reveal-text" style="--delay: 0.4s">
+          <a
+            href="https://github.com/akhilrashed"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hero__social-link"
+            aria-label="GitHub profile"
+          >
+            <i data-lucide="github"></i>
+          </a>
+          <a
+            href="https://twitter.com/akhilrashed"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="hero__social-link"
+            aria-label="Twitter profile"
+          >
+            <i data-lucide="twitter"></i>
+          </a>
+          <a
+            href="mailto:akhil@example.com"
+            class="hero__social-link"
+            aria-label="Send email"
+          >
+            <i data-lucide="mail"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- LINKS SECTION -->
+    <section class="links" id="links">
+      <h2 class="links__heading reveal">My Links</h2>
+
+      <div class="links__grid">
+
+        <!-- Facebook -->
+        <a
+          href="https://facebook.com/akhilrashed"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="link-card reveal-card"
+          style="--card-i: 0"
+          aria-label="Facebook"
+        >
+          <div class="link-card__shimmer"></div>
+          <div class="link-card__icon">
+            <i data-lucide="facebook"></i>
+          </div>
+          <span class="link-card__label">Facebook</span>
+          <i data-lucide="arrow-up-right" class="link-card__arrow"></i>
+        </a>
+
+        <!-- Instagram -->
+        <a
+          href="https://instagram.com/akhilrashed"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="link-card reveal-card"
+          style="--card-i: 1"
+          aria-label="Instagram"
+        >
+          <div class="link-card__shimmer"></div>
+          <div class="link-card__icon">
+            <i data-lucide="instagram"></i>
+          </div>
+          <span class="link-card__label">Instagram</span>
+          <i data-lucide="arrow-up-right" class="link-card__arrow"></i>
+        </a>
+
+        <!-- WhatsApp -->
+        <a
+          href="https://wa.me/1234567890"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="link-card reveal-card"
+          style="--card-i: 2"
+          aria-label="WhatsApp"
+        >
+          <div class="link-card__shimmer"></div>
+          <div class="link-card__icon">
+            <i data-lucide="message-circle"></i>
+          </div>
+          <span class="link-card__label">WhatsApp</span>
+          <i data-lucide="arrow-up-right" class="link-card__arrow"></i>
+        </a>
+
+        <!-- YouTube -->
+        <a
+          href="https://youtube.com/@akhilrashed"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="link-card reveal-card"
+          style="--card-i: 3"
+          aria-label="YouTube"
+        >
+          <div class="link-card__shimmer"></div>
+          <div class="link-card__icon">
+            <i data-lucide="youtube"></i>
+          </div>
+          <span class="link-card__label">YouTube</span>
+          <i data-lucide="arrow-up-right" class="link-card__arrow"></i>
+        </a>
+
+        <!-- LinkedIn -->
+        <a
+          href="https://linkedin.com/in/akhilrashed"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="link-card reveal-card"
+          style="--card-i: 4"
+          aria-label="LinkedIn"
+        >
+          <div class="link-card__shimmer"></div>
+          <div class="link-card__icon">
+            <i data-lucide="linkedin"></i>
+          </div>
+          <span class="link-card__label">LinkedIn</span>
+          <i data-lucide="arrow-up-right" class="link-card__arrow"></i>
+        </a>
+
+        <!-- GitHub -->
+        <a
+          href="https://github.com/akhilrashed"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="link-card reveal-card"
+          style="--card-i: 5"
+          aria-label="GitHub"
+        >
+          <div class="link-card__shimmer"></div>
+          <div class="link-card__icon">
+            <i data-lucide="github"></i>
+          </div>
+          <span class="link-card__label">GitHub</span>
+          <i data-lucide="arrow-up-right" class="link-card__arrow"></i>
+        </a>
+
+        <!-- Telegram -->
+        <a
+          href="https://t.me/akhilrashed"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="link-card reveal-card"
+          style="--card-i: 6"
+          aria-label="Telegram"
+        >
+          <div class="link-card__shimmer"></div>
+          <div class="link-card__icon">
+            <i data-lucide="send"></i>
+          </div>
+          <span class="link-card__label">Telegram</span>
+          <i data-lucide="arrow-up-right" class="link-card__arrow"></i>
+        </a>
+
+        <!-- Portfolio Website -->
+        <a
+          href="https://akhilrashed.com"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="link-card reveal-card"
+          style="--card-i: 7"
+          aria-label="Portfolio Website"
+        >
+          <div class="link-card__shimmer"></div>
+          <div class="link-card__icon">
+            <i data-lucide="globe"></i>
+          </div>
+          <span class="link-card__label">Portfolio</span>
+          <i data-lucide="arrow-up-right" class="link-card__arrow"></i>
+        </a>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══════════════════════════════════════════
+       FOOTER
+       ═══════════════════════════════════════════ -->
+  <footer class="footer reveal" id="footer">
+    <div class="footer__inner">
+      <p class="footer__copy">
+        &copy; 2026 Akhil Rashed. All Rights Reserved.
+      </p>
+      <p class="footer__made">
+        Crafted with
+        <i data-lucide="heart" class="footer__heart"></i>
+        precision.
+      </p>
+    </div>
+  </footer>
+
+  <!-- Main Script -->
+  <script src="script.js"></script>
+</body>
+    </html>
