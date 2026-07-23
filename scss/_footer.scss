@@ -1,0 +1,56 @@
+// ═══════════════════════════════════════════
+// FOOTER
+// ═══════════════════════════════════════════
+
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.footer {
+  padding: $space-2xl $space-lg;
+  text-align: center;
+
+  &__inner {
+    max-width: 640px;
+    margin: 0 auto;
+    @include glass-panel(
+      $bg: var(--glass-tint),
+      $blur: $glass-blur,
+      $radius: $glass-border-radius-sm
+    );
+    padding: $space-lg $space-xl;
+    @include theme-transition;
+  }
+
+  &__copy {
+    font-family: $font-body;
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: var(--color-text-muted);
+    margin-bottom: $space-xs;
+    @include theme-transition;
+  }
+
+  &__made {
+    font-family: $font-body;
+    font-size: 0.75rem;
+    font-weight: 400;
+    color: var(--color-text-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    @include theme-transition;
+  }
+
+  &__heart {
+    width: 14px;
+    height: 14px;
+    color: #e74c3c;
+    animation: heartBeat 2s ease-in-out infinite;
+    display: inline-block;
+
+    @include reduced-motion {
+      animation: none;
+    }
+  }
+}
