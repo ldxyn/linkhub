@@ -1,0 +1,173 @@
+// ═══════════════════════════════════════════
+// HERO — Profile Section
+// ═══════════════════════════════════════════
+
+@use 'variables' as *;
+@use 'mixins' as *;
+
+.hero {
+  min-height: 60vh;
+  @include flex-center;
+  padding: calc($space-4xl + 80px) $space-lg $space-2xl;
+
+  @include mobile-only {
+    padding-top: calc($space-3xl + 80px);
+    min-height: 50vh;
+  }
+
+  // ── Glass Card Container ──
+  &__card {
+    @include glass-panel(
+      $bg: var(--glass-tint),
+      $blur: $glass-blur-heavy,
+      $radius: $glass-border-radius
+    );
+    @include flex-col-center;
+    @include theme-transition;
+    padding: $space-2xl $space-2xl $space-xl;
+    max-width: 480px;
+    width: 100%;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+
+    @include mobile-only {
+      padding: $space-xl $space-lg;
+      margin: 0 $space-sm;
+    }
+
+    // Inner subtle shine
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background: linear-gradient(
+        90deg,
+        transparent 0%,
+        rgba(255, 255, 255, 0.15) 50%,
+        transparent 100%
+      );
+    }
+  }
+
+  // ── Profile Image ──
+  &__image-wrapper {
+    position: relative;
+    margin-bottom: $space-lg;
+  }
+
+  &__glow-ring {
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    background: conic-gradient(
+      from 0deg,
+      var(--color-accent),
+      rgba(var(--color-accent-rgb), 0.2),
+      var(--color-accent),
+      rgba(var(--color-accent-rgb), 0.2),
+      var(--color-accent)
+    );
+    animation: ringRotate 6s linear infinite;
+    opacity: 0.6;
+
+    &::after {
+      content: '';
+      position: absolute;
+      inset: 3px;
+      border-radius: 50%;
+      background: var(--color-bg);
+      transition: background $transition-theme;
+    }
+  }
+
+  &__image {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    object-fit: cover;
+    position: relative;
+    z-index: 2;
+    border: 3px solid var(--color-border);
+    animation: float 4s ease-in-out infinite;
+    transition: border-color $transition-theme;
+
+    @include mobile-only {
+      width: 120px;
+      height: 120px;
+    }
+
+    @include reduced-motion {
+      animation: none;
+    }
+  }
+
+  // ── Name ──
+  &__name {
+    font-family: $font-display;
+    font-weight: 900;
+    color: var(--color-text-primary);
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    margin-bottom: $space-sm;
+    font-size: clamp(1.75rem, 5vw, 2.5rem);
+    @include theme-transition;
+  }
+
+  // ── Tagline ──
+  &__tagline {
+    font-family: $font-body;
+    font-weight: 400;
+    color: var(--color-text-secondary);
+    font-size: clamp(0.875rem, 2.5vw, 1rem);
+    line-height: 1.5;
+    margin-bottom: $space-lg;
+    max-width: 320px;
+    @include theme-transition;
+  }
+
+  // ── Social Icons ──
+  &__social {
+    display: flex;
+    align-items: center;
+    gap: $space-md;
+  }
+
+  &__social-link {
+    @include flex-center;
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    background: var(--color-surface);
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    border: 1px solid var(--color-border);
+    transition:
+      color $transition-fast,
+      background $transition-fast,
+      border-color $transition-fast,
+      transform $transition-spring,
+      box-shadow $transition-fast;
+    @include focus-ring;
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    &:hover {
+      color: var(--color-accent);
+      background: var(--color-accent-subtle);
+      border-color: rgba(var(--color-accent-rgb), 0.3);
+      transform: translateY(-3px) scale(1.05);
+      box-shadow: 0 8px 24px var(--color-accent-glow);
+    }
+
+    &:active {
+      transform: translateY(-1px) scale(1);
+    }
+  }
+}
