@@ -1,0 +1,153 @@
+// ═══════════════════════════════════════════
+// MIXINS — Reusable Style Utilities
+// ═══════════════════════════════════════════
+
+@use 'variables' as *;
+
+// ── Responsive Breakpoints ─────────────────
+@mixin mobile-only {
+  @media (max-width: #{$bp-tablet - 1px}) {
+    @content;
+  }
+}
+
+@mixin tablet-up {
+  @media (min-width: $bp-tablet) {
+    @content;
+  }
+}
+
+@mixin desktop-up {
+  @media (min-width: $bp-desktop) {
+    @content;
+  }
+}
+
+@mixin large-up {
+  @media (min-width: $bp-large) {
+    @content;
+  }
+}
+
+// ── Glassmorphism Panel ────────────────────
+@mixin glass-panel(
+  $bg: var(--glass-tint),
+  $blur: $glass-blur,
+  $radius: $glass-border-radius,
+  $border-color: var(--glass-border)
+) {
+  background: $bg;
+  backdrop-filter: blur($blur);
+  -webkit-backdrop-filter: blur($blur);
+  border-radius: $radius;
+  border: 1px solid $border-color;
+  box-shadow:
+    0 8px 32px var(--color-shadow),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+// ── Glass Card with hover ──────────────────
+@mixin glass-card {
+  @include glass-panel(
+    $bg: var(--card-bg),
+    $radius: $glass-border-radius-sm
+  );
+  transition:
+    transform $transition-base,
+    box-shadow $transition-base,
+    background $transition-theme,
+    border-color $transition-base;
+
+  &:hover {
+    background: var(--card-bg-hover);
+    border-color: var(--color-border-hover);
+    transform: translateY(-4px);
+    box-shadow:
+      0 20px 60px var(--color-shadow-heavy),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  &:active {
+    transform: translateY(-2px);
+  }
+}
+
+// ── Smooth Theme Transition ────────────────
+@mixin theme-transition {
+  transition:
+    background-color $transition-theme,
+    color $transition-theme,
+    border-color $transition-theme,
+    box-shadow $transition-theme,
+    opacity $transition-theme;
+}
+
+// ── Flex Helpers ───────────────────────────
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+@mixin flex-col-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+// ── Fluid Typography ──────────────────────
+@mixin fluid-type($min-size, $max-size, $min-vw: 320px, $max-vw: 1440px) {
+  font-size: clamp(#{$min-size}, calc(#{$min-size} + (#{strip-unit($max-size)} - #{strip-unit($min-size)}) * ((100vw - #{$min-vw}) / (#{strip-unit($max-vw)} - #{strip-unit($min-vw)}))), #{$max-size});
+}
+
+// Strip unit helper
+@function strip-unit($number) {
+  @if type-of($number) == 'number' and not unitless($number) {
+    @return calc($number / ($number * 0 + 1));
+  }
+  @return $number;
+}
+
+// ── Text Truncation ───────────────────────
+@mixin truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// ── Focus Visible Ring ────────────────────
+@mixin focus-ring {
+  &:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+  }
+}
+
+// ── Prefers Reduced Motion ────────────────
+@mixin reduced-motion {
+  @media (prefers-reduced-motion: reduce) {
+    @content;
+  }
+}
+
+// ── Shimmer Effect ────────────────────────
+@mixin shimmer-effect {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.08) 50%,
+    transparent 100%
+  );
+  transition: none;
+}
